@@ -1,0 +1,21 @@
+# BMad Quality Benchmarks — Owner: bmad-orchestrator
+version: 1.0.0
+epic_scope: epic-1
+
+thresholds:
+  unit_test_pass_rate: 100        # zero tolerance
+  test_coverage_min: 80
+  test_coverage_target: 95
+  build_success: 100
+  typecheck_errors: 0             # tsc --noEmit, strict mode
+  code_review_critical: 0
+  code_review_high: 0
+  security_score_min: 90
+  accessibility_critical: 0
+  client_bundle_kb_max: 120
+  aggregate_quality_min: 80
+  aggregate_quality_target: 90
+
+notes:
+  - Coverage is measured on server source only; the client is validated by
+    typecheck, build and manual smoke test (assignment asks for server-side tests).
