@@ -1,0 +1,22 @@
+{
+  "name": "mrd-search-discovery",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Search & discovery mini-app — Express + TypeScript API with a Svelte 5 client",
+  "engines": { "node": ">=18" },
+  "workspaces": ["packages/shared", "packages/server", "packages/client"],
+  "scripts": {
+    "predev": "npm run build -w @mrd/shared",
+    "dev": "node scripts/dev.mjs",
+    "prebuild": "npm run build -w @mrd/shared",
+    "build": "npm run build -w @mrd/server && npm run build -w @mrd/client",
+    "start": "npm run start -w @mrd/server",
+    "pretest": "npm run build -w @mrd/shared",
+    "test": "npm run test -w @mrd/server",
+    "test:watch": "npm run test:watch -w @mrd/server",
+    "test:coverage": "npm run test:coverage -w @mrd/server",
+    "pretypecheck": "npm run build -w @mrd/shared",
+    "typecheck": "npm run typecheck -w @mrd/server && npm run typecheck -w @mrd/client",
+    "clean": "rm -rf packages/*/dist packages/server/coverage"
+  }
+}
