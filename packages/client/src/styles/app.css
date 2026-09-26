@@ -1,0 +1,92 @@
+/* ---------------------------------------------------------------- tokens */
+:root {
+  color-scheme: light dark;
+
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-2: #f0f2f5;
+  --border: #dfe3e8;
+  --text: #14171c;
+  --text-muted: #5b6472;
+  --accent: #c8102e;          /* a warm delivery-brand red, not a real mark */
+  --accent-contrast: #ffffff;
+  --ok: #0f7b3f;
+  --warn-bg: #fff6e5;
+  --warn-border: #f0c46a;
+  --warn-text: #7a4b00;
+  --danger-bg: #fdecec;
+  --danger-border: #f3b0b0;
+  --danger-text: #8d1f1f;
+
+  --radius-sm: 6px;
+  --radius: 12px;
+  --radius-lg: 18px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --shadow: 0 1px 2px rgb(16 22 32 / 6%), 0 8px 24px rgb(16 22 32 / 6%);
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0b0d12;
+    --surface: #151922;
+    --surface-2: #1c2130;
+    --border: #2a3040;
+    --text: #e8ebf0;
+    --text-muted: #9aa3b2;
+    --accent: #ff4d63;
+    --accent-contrast: #16040a;
+    --ok: #4ade80;
+    --warn-bg: #2c2410;
+    --warn-border: #6b5520;
+    --warn-text: #f5c96b;
+    --danger-bg: #2c1416;
+    --danger-border: #6b2a2f;
+    --danger-text: #ff9b9b;
+    --shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 8px 24px rgb(0 0 0 / 35%);
+  }
+}
+
+/* ------------------------------------------------------------------ base */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+button, input, select { font: inherit; color: inherit; }
+
+/* One focus treatment everywhere — WCAG 2.4.7, and it must survive dark mode. */
+:where(a, button, input, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
