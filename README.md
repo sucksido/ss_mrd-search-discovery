@@ -15,13 +15,6 @@ packages/
 └── client/   Svelte 5 (runes) + Vite, no UI framework or CSS library
 ```
 
-| | |
-|---|---|
-| ![Browse with one degraded item](docs/screenshots/01-browse.png) | ![Debounced typeahead](docs/screenshots/02-typeahead.png) |
-| Browsing the catalog. One item's live pricing failed — it shows the menu price, says why, and offers a Retry. The rest of the page is unaffected. | Debounced typeahead. Suggestions match item names and tags, not categories. |
-| ![Fully degraded upstream](docs/screenshots/03-degraded.png) | ![Dark mode](docs/screenshots/04-dark.png) |
-| The upstream circuit is open. Search still works, every card degrades individually, and the banner says exactly what happened. | Dark mode, and state restored from the URL (`?q=burger`). |
-
 ---
 
 ## Quick start
