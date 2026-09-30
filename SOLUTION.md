@@ -210,6 +210,8 @@ asserted, not hoped for.
 
 ---
 
+## 6. Two bugs that only verification caught
+
 1. **The effect loop.** The first client version called `store.init()` inside a
    Svelte 5 `$effect`. That effect tracked the store reads inside `init()`, so
    the first response re-triggered it, re-applied the URL state and wiped the
@@ -224,7 +226,7 @@ Everything in this repo I can explain line by line, which is the actual bar.
 
 ---
 
-## 6. If I had another four hours
+## 7. If I had another four hours
 
 1. Component tests for the store's abort/URL/retry logic (highest remaining risk).
 2. A batched upstream endpoint with per-item re-split on failure, to show the
