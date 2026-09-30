@@ -210,27 +210,6 @@ asserted, not hoped for.
 
 ---
 
-## 6. Process: BMad
-
-Built through the [BMad Enterprise SDLC](docs/bmad/) methodology — product brief
-→ PRD → architecture → UX spec → epics/stories → readiness check → TDD
-implementation. The artifacts are in `docs/bmad/planning-artifacts/`.
-
-It is more ceremony than a 4-hour assignment needs, and I would not claim
-otherwise. What it bought here was specific: the "not built" table above exists
-because the product brief named over-engineering as the project's main risk and
-set the rule *"every resilience mechanism must be demonstrable in the UI or in a
-test, or it doesn't ship"*. Both the circuit breaker and the cache are visible
-in the Instrumentation panel because of that rule.
-
----
-
-## 7. AI assistance
-
-Used throughout — the assignment invites it, and pretending otherwise would be
-silly. `AI_USAGE.md` has the actual prompts, what I accepted, and what I
-rejected. Two things are worth flagging here because they shaped the code:
-
 1. **The effect loop.** The first client version called `store.init()` inside a
    Svelte 5 `$effect`. That effect tracked the store reads inside `init()`, so
    the first response re-triggered it, re-applied the URL state and wiped the
@@ -245,7 +224,7 @@ Everything in this repo I can explain line by line, which is the actual bar.
 
 ---
 
-## 8. If I had another four hours
+## 6. If I had another four hours
 
 1. Component tests for the store's abort/URL/retry logic (highest remaining risk).
 2. A batched upstream endpoint with per-item re-split on failure, to show the

@@ -267,6 +267,3 @@ are integer cents in ZAR; only the view layer knows about rands.
 ## Where to read next
 
 - **`SOLUTION.md`** — design decisions, trade-offs, what I deliberately did not build.
-- **`AI_USAGE.md`** — the prompts used, and how the AI output was steered and corrected.
-- **`docs/bmad/`** — the BMad planning artifacts this was built from (brief, PRD,
-  architecture, UX spec, epics, readiness check).
