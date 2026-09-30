@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Search and Discovery">
+  <!--
+    An original mark for this exercise, not a brand logo: a magnifier whose lens
+    is a plate. Drawn as vectors on a 32-unit grid so it stays legible at 16px,
+    and as a single file with no external references so it works offline.
+  -->
+  <rect width="32" height="32" rx="7" fill="#b3001b"/>
+  <!-- No detail inside the lens: at 16 physical pixels the ring is barely three
+       pixels thick, and anything drawn within it closes the hole up. -->
+  <g fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round">
+    <circle cx="13.5" cy="13.5" r="6.5"/>
+    <path d="M18.6 18.6 24.5 24.5"/>
+  </g>
+</svg>

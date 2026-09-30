@@ -47,6 +47,14 @@ export class SearchStore {
   readonly isBusy = $derived(this.state === 'loading' || this.state === 'refreshing');
   readonly isEmpty = $derived(this.state !== 'loading' && this.response !== null && this.results.length === 0);
 
+  /**
+   * Counts for the filter chips. The server builds facets from the matched set
+   * *before* applying the category filter, so selecting a chip never collapses
+   * the others to zero — you can always see what else the query matched. The
+   * catalog-wide list is only the fallback for the first paint.
+   */
+  readonly facets = $derived(this.response?.facets.categories ?? this.categories);
+
   #searchAbort: AbortController | null = null;
   #suggestAbort: AbortController | null = null;
 

@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { SearchStore } from '../lib/search-store.svelte.js';
+  import Icon from './Icon.svelte';
 
   let { store }: { store: SearchStore } = $props();
 
@@ -39,14 +40,16 @@
 >
   <label class="visually-hidden" for="search-input">Search the catalog</label>
   <div class="field">
-    <span class="icon" aria-hidden="true">🔍</span>
+    <!-- Drawn from the shared Icon set rather than inline here, so the magnifier
+         in the field and the one in the empty state are the same glyph. -->
+    <span class="icon"><Icon name="search" size={15} /></span>
     <input
       id="search-input"
       bind:this={input}
       type="text"
       role="combobox"
       autocomplete="off"
-      placeholder="Search for burgers, sushi, coffee…"
+      placeholder="Search the catalog"
       aria-expanded={store.suggestionsOpen}
       aria-controls="suggestion-list"
       aria-autocomplete="list"
@@ -75,7 +78,6 @@
           class:active={index === store.activeSuggestion}
         >
           <button type="button" onmousedown={() => store.chooseSuggestion(index)}>
-            <span aria-hidden="true">{suggestion.emoji}</span>
             <span class="name">{suggestion.name}</span>
             <span class="category">{suggestion.category}</span>
           </button>
@@ -86,84 +88,91 @@
 </form>
 
 <style>
-  .search { position: relative; display: flex; gap: var(--space-2); }
+  /* Capped well short of the results grid. A search field stretched to the full
+     width of a two-column layout reads as an empty bar rather than as an
+     invitation to type, and the suggestion popover inherits that width. */
+  .search { position: relative; display: flex; gap: var(--space-2); max-width: 560px; }
 
   .field {
     position: relative;
     display: flex;
     align-items: center;
+    gap: var(--space-2);
     flex: 1;
     background: var(--surface);
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-strong);
     border-radius: var(--radius);
     padding: 0 var(--space-3);
   }
-  .field:focus-within { border-color: var(--accent); }
+  .field:focus-within { border-color: var(--text); }
 
-  .icon { opacity: 0.6; margin-right: var(--space-2); }
+  .icon { display: flex; color: var(--text-dim); flex: none; }
 
   input {
     flex: 1;
     border: 0;
     background: transparent;
-    padding: var(--space-3) 0;
-    font-size: 1rem;
+    padding: 7px 0;
+    font-size: 0.875rem;
     min-width: 0;
   }
+  input::placeholder { color: var(--text-dim); }
   input:focus { outline: none; }
 
   .clear {
     border: 0;
-    background: var(--surface-2);
-    color: var(--text-muted);
-    border-radius: 50%;
-    width: 22px; height: 22px;
+    background: none;
+    color: var(--text-dim);
+    font-size: 1rem;
     line-height: 1;
+    padding: 0 2px;
     cursor: pointer;
   }
+  .clear:hover { color: var(--text); }
 
   .submit {
-    border: 0;
+    border: 1px solid var(--accent);
     background: var(--accent);
     color: var(--accent-contrast);
-    font-weight: 600;
-    padding: 0 var(--space-5);
+    font-size: 0.8125rem;
+    font-weight: 550;
+    padding: 0 var(--space-4);
     border-radius: var(--radius);
     cursor: pointer;
   }
-  .submit:hover { filter: brightness(1.08); }
+  .submit:hover { filter: brightness(1.1); }
 
   .suggestions {
     position: absolute;
-    top: calc(100% + 6px);
+    top: calc(100% + 4px);
     left: 0; right: 0;
     z-index: 20;
-    margin: 0; padding: var(--space-1);
+    margin: 0; padding: var(--space-1) 0;
     list-style: none;
     background: var(--surface);
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-strong);
     border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    max-height: 320px;
+    box-shadow: var(--shadow-popover);
+    max-height: 300px;
     overflow-y: auto;
   }
   .suggestions button {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     gap: var(--space-3);
     width: 100%;
     border: 0;
     background: transparent;
     text-align: left;
     padding: var(--space-2) var(--space-3);
-    border-radius: var(--radius-sm);
+    font-size: 0.8125rem;
     cursor: pointer;
   }
   li.active button, .suggestions button:hover { background: var(--surface-2); }
   .name { flex: 1; }
-  .category { color: var(--text-muted); font-size: 0.8rem; }
+  .category { color: var(--text-dim); font-size: 0.75rem; }
 
   @media (max-width: 520px) {
-    .submit { padding: 0 var(--space-4); }
+    .submit { padding: 0 var(--space-3); }
   }
 </style>

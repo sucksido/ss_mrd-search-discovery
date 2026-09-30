@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Icon from './Icon.svelte';
+
   let {
     tone = 'warn',
     title,
@@ -17,39 +19,51 @@
 <!-- role=status (polite) rather than alert: a degraded upstream is worth
      announcing, but not worth interrupting whatever the user is doing. -->
 <div class="banner {tone}" role="status">
-  <span class="dot" aria-hidden="true"></span>
-  <div class="text">
+  <!-- Decoration on top of the wording, not a replacement for it: the title
+       already says what happened. -->
+  <span class="glyph"><Icon name="alert" size={15} /></span>
+  <p class="text">
     <strong>{title}</strong>
-    {#if detail !== undefined}<span>{detail}</span>{/if}
-  </div>
+    {#if detail !== undefined}<span class="detail">{detail}</span>{/if}
+  </p>
   {#if actionLabel !== undefined && onAction !== undefined}
     <button type="button" onclick={onAction}>{actionLabel}</button>
   {/if}
 </div>
 
 <style>
+  /* A rule and a tint, not a rounded tinted box: this sits inside the reading
+     column, so it should read as an annotation on the results rather than as a
+     separate floating component. */
   .banner {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     gap: var(--space-3);
-    padding: var(--space-3) var(--space-4);
-    border-radius: var(--radius);
-    border: 1px solid;
-    margin-bottom: var(--space-4);
-    font-size: 0.9rem;
+    padding: var(--space-2) var(--space-3);
+    border-left: 2px solid;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin: var(--space-3) 0;
+    font-size: 0.8125rem;
   }
-  .warn { background: var(--warn-bg); border-color: var(--warn-border); color: var(--warn-text); }
-  .danger { background: var(--danger-bg); border-color: var(--danger-border); color: var(--danger-text); }
-  .dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; flex: none; }
-  .text { display: flex; flex-direction: column; gap: 2px; }
+  .warn { background: var(--warn-bg); border-color: var(--warn); color: var(--warn); }
+  .danger { background: var(--danger-bg); border-color: var(--danger); color: var(--danger); }
+
+  /* Nudged down a pixel: the flex baseline aligns the svg box, not the glyph. */
+  .glyph { display: flex; flex: none; position: relative; top: 2px; }
+  .text { margin: 0; }
+  strong { font-weight: 600; }
+  .detail { color: var(--text-muted); margin-left: var(--space-2); }
+
   button {
     margin-left: auto;
-    border: 1px solid currentColor;
-    background: transparent;
+    border: 0;
+    background: none;
     color: inherit;
-    border-radius: var(--radius-sm);
-    padding: var(--space-1) var(--space-3);
+    padding: 0;
+    font-size: inherit;
     cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
     white-space: nowrap;
   }
 </style>

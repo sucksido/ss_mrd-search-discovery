@@ -3,7 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0b0d12" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Matches the page canvas in each scheme, so the mobile browser chrome
+         does not sit as a dark band above a light page. The old single value
+         was left over from an earlier palette. -->
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f5f3" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0e0e0f" />
     <meta name="description" content="Search and discover items with live availability, pricing and delivery estimates." />
     <title>Search &amp; Discovery</title>
   </head>
